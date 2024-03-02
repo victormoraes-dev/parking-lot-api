@@ -2,5 +2,27 @@ server:
   port: 8080
 
 spring:
-  profiles:
-    active: postgres
+  application:
+    name: parking-lot-app
+  datasource:
+    url: jdbc:postgresql://127.0.0.1:5432/parking-lot-app-db
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: postgres
+  h2:
+    console:
+      enabled: true
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+    open-in-view: false
+
+logging:
+  level:
+    root: INFO
+    org.springframework: INFO
+    org.hibernate.SQL: DEBUG
+
