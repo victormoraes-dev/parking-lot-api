@@ -43,6 +43,10 @@ public abstract class UserEntity {
         public AdminEntity(String username, String firstName, String lastName) {
             super(username, firstName, lastName);
         }
+
+        public AdminEntity() {
+            super();
+        }
     }
 
     @Entity
@@ -52,6 +56,7 @@ public abstract class UserEntity {
         public AnonymousEntity() {
             super("anonymous");
         }
+
     }
 
     @Entity
@@ -60,6 +65,10 @@ public abstract class UserEntity {
         public CustomerEntity(String username, String firstName, String lastName) {
             super(username, firstName, lastName);
         }
+
+        public CustomerEntity() {
+            super();
+        }
     }
 
     @Entity
@@ -67,6 +76,10 @@ public abstract class UserEntity {
     public static class OperatorEntity extends UserEntity {
         public OperatorEntity(String username, String firstName, String lastName) {
             super(username, firstName, lastName);
+        }
+
+        public OperatorEntity() {
+            super();
         }
     }
 
