@@ -16,7 +16,7 @@ class TicketTest {
     @BeforeAll
     public static void init() {
         vehicle = new Car();
-        vehicle.setCode("GIF8KNB");
+        vehicle.setPlate("GIF8KNB");
         vehicle.setModel("HB20");
         vehicle.setColor("SAND");
     }

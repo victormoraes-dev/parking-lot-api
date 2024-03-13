@@ -21,11 +21,11 @@ class TicketControllerTest extends TestContainersBaseConfigTest {
 
     @Test
     @Sql(scripts = "/create-ticket-insert-available-spot.sql")
-    public void testCreateTicketEndpoint() throws Exception {
+    public void givenAValidTicketBodyShouldCreateATicket() throws Exception {
 
         mockMvc.perform(MockMvcRequestBuilders
                         .post("/tickets")
-                        .content("{\"vehicle\":{\"code\":\"ABC123\",\"model\":\"Toyota Corolla\",\"color\":\"Red\",\"type\":\"CAR\"},\"vehicleType\":\"CAR\"}")
+                        .content("{\"vehicle\":{\"plate\":\"ABC123\",\"model\":\"Toyota Corolla\",\"color\":\"Red\",\"type\":\"CAR\"},\"vehicleType\":\"CAR\"}")
                         .contentType("application/json"))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.success").value(true))
@@ -36,6 +36,16 @@ class TicketControllerTest extends TestContainersBaseConfigTest {
                 .andExpect(jsonPath("$.data.vehicle.type").value("CAR"))
                 .andExpect(header().exists("Location"))
                 .andExpect(header().string("Location", matchesPattern(".*\\/tickets\\/\\d+")));
+    }
+
+    @Test
+    public void givenAnInvalidVehiclePlateShouldReturnBadRequestHttpStatusCode() throws Exception {
+
+        mockMvc.perform(MockMvcRequestBuilders
+                        .post("/tickets")
+                        .content("{\"vehicle\":{\"plate\":\"\",\"model\":\"Toyota Corolla\",\"color\":\"Red\",\"type\":\"CAR\"},\"vehicleType\":\"CAR\"}")
+                        .contentType("application/json"))
+                .andExpect(status().isBadRequest());
     }
 
     @Test

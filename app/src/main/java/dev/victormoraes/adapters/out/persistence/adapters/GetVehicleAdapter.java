@@ -26,7 +26,7 @@ public class GetVehicleAdapter implements GetVehiclePort {
     public Optional<Vehicle> getVehicle(String code, VehicleType vehicleType) {
 
 
-        Optional<VehicleEntity> vehicleEntity = vehicleRepository.findByCode(code);
+        Optional<VehicleEntity> vehicleEntity = vehicleRepository.findByPlate(code);
 
         if(vehicleEntity.isEmpty()){
             return Optional.empty();

@@ -2,16 +2,16 @@ package dev.victormoraes.domain.vehicle;
 
 public abstract class Vehicle {
 
-    private String code;
+    private String plate;
     private String model;
     private String color;
 
-    public String getCode() {
-        return code;
+    public String getPlate() {
+        return plate;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public void setPlate(String plate) {
+        this.plate = plate;
     }
 
     public String getModel() {
