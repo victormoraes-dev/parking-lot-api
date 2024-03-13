@@ -6,7 +6,7 @@ services:
     ports:
       - "5432:5432"
     environment:
-      - POSTGRES_DB=parking-lot-app-db
+      - POSTGRES_DB=parking-lot-api-db
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
     volumes:

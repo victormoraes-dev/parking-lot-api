@@ -1,18 +1,15 @@
 package dev.victormoraes.adapters.in;
 
 import dev.victormoraes.adapters.in.dtos.ResponseWrapper;
-import dev.victormoraes.adapters.in.dtos.TicketRequestDTO;
-import dev.victormoraes.adapters.in.dtos.TicketResponseDTO;
-import dev.victormoraes.adapters.mappers.VehicleMapper;
+import dev.victormoraes.adapters.in.dtos.ticket.TicketRequestDTO;
+import dev.victormoraes.adapters.in.dtos.ticket.TicketResponseDTO;
 import dev.victormoraes.domain.Ticket;
 import dev.victormoraes.adapters.mappers.TicketMapper;
 import dev.victormoraes.domain.result.Result;
 import dev.victormoraes.domain.users.Customer;
-import dev.victormoraes.domain.users.User;
 import dev.victormoraes.domain.vehicle.Vehicle;
 import dev.victormoraes.domain.vehicle.VehicleFactory;
-import dev.victormoraes.domain.vehicle.VehicleType;
-import dev.victormoraes.usecases.CreatingATicketUseCase;
+import dev.victormoraes.usecases.CreatingTicketUseCase;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,12 +24,12 @@ import java.net.URISyntaxException;
 @RequestMapping("/tickets")
 public class TicketController {
 
-    private final CreatingATicketUseCase useCase;
+    private final CreatingTicketUseCase useCase;
     private final TicketMapper ticketMapper;
 
     private final HttpServletRequest request;
 
-    public TicketController(CreatingATicketUseCase useCase, TicketMapper ticketMapper, HttpServletRequest request) {
+    public TicketController(CreatingTicketUseCase useCase, TicketMapper ticketMapper, HttpServletRequest request) {
         this.useCase = useCase;
         this.ticketMapper = ticketMapper;
         this.request = request;

@@ -10,7 +10,7 @@ services:
     depends_on:
       - db
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/parking-lot-app-db
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/parking-lot-api-db
       - SPRING_DATASOURCE_USERNAME=postgres
       - SPRING_DATASOURCE_PASSWORD=postgres
 
@@ -19,7 +19,7 @@ services:
     ports:
       - "5432:5432"
     environment:
-      - POSTGRES_DB=parking-lot-app-db
+      - POSTGRES_DB=parking-lot-api-db
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
     volumes:

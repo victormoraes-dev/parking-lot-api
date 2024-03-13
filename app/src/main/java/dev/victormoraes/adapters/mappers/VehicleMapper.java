@@ -1,6 +1,6 @@
 package dev.victormoraes.adapters.mappers;
 
-import dev.victormoraes.adapters.in.dtos.VehicleDTO;
+import dev.victormoraes.adapters.in.dtos.vehicle.VehicleDTO;
 import dev.victormoraes.adapters.out.persistence.entities.VehicleEntity;
 import dev.victormoraes.domain.vehicle.Vehicle;
 import dev.victormoraes.domain.vehicle.VehicleFactory;

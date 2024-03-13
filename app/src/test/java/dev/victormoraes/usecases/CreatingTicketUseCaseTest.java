@@ -22,7 +22,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class CreatingATicketUseCaseTest {
+class CreatingTicketUseCaseTest {
 
     @Mock
     private SpotAvailabilityPort spotAvailabilityPort;
@@ -38,7 +38,7 @@ class CreatingATicketUseCaseTest {
     private GetUserPort getUserPort;
 
     @InjectMocks
-    private CreatingATicketUseCase useCase;
+    private CreatingTicketUseCase useCase;
 
     @Test
     public void whenANewVehicleIsEnteringTheParkingLotShouldCreateANewTicket() {

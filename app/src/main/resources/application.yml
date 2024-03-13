@@ -3,9 +3,9 @@ server:
 
 spring:
   application:
-    name: parking-lot-app
+    name: parking-lot-api
   datasource:
-    url: jdbc:postgresql://127.0.0.1:5432/parking-lot-app-db
+    url: jdbc:postgresql://127.0.0.1:5432/parking-lot-api-db
     driver-class-name: org.postgresql.Driver
     username: postgres
     password: postgres
