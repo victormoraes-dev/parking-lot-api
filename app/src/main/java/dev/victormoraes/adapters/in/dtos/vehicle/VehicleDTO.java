@@ -1,4 +1,4 @@
-package dev.victormoraes.adapters.in.dtos;
+package dev.victormoraes.adapters.in.dtos.vehicle;
 
 import dev.victormoraes.domain.vehicle.VehicleType;
 

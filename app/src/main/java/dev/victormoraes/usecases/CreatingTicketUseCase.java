@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 import static java.util.Objects.isNull;
 
 @Component
-public class CreatingATicketUseCase {
+public class CreatingTicketUseCase {
 
     private final SpotAvailabilityPort spotAvailabilityPort;
     private final CreateTicketPort createTicketPort;
@@ -21,7 +21,7 @@ public class CreatingATicketUseCase {
     private final CreateUserPort createUserPort;
     private final GetUserPort getUserPort;
 
-    public CreatingATicketUseCase(SpotAvailabilityPort spotAvailabilityPort, CreateTicketPort createTicketPort, GetVehiclePort getVehiclePort, CreateVehiclePort createVehiclePort, CreateUserPort createUserPort, GetUserPort getUserPort) {
+    public CreatingTicketUseCase(SpotAvailabilityPort spotAvailabilityPort, CreateTicketPort createTicketPort, GetVehiclePort getVehiclePort, CreateVehiclePort createVehiclePort, CreateUserPort createUserPort, GetUserPort getUserPort) {
         this.spotAvailabilityPort = spotAvailabilityPort;
         this.createTicketPort = createTicketPort;
         this.getVehiclePort = getVehiclePort;

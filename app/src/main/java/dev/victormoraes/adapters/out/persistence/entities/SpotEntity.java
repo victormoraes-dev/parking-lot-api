@@ -12,6 +12,8 @@ public class SpotEntity {
     private Long spotId;
 
     @Column(nullable = false)
+    private int floor;
+    @Column(nullable = false)
     private String position;
 
     @Column(nullable = false)
@@ -20,6 +22,16 @@ public class SpotEntity {
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private VehicleType vehicleType;
+
+    public SpotEntity(int floor, String position, boolean isFree, VehicleType vehicleType) {
+        this.floor = floor;
+        this.position = position;
+        this.isFree = isFree;
+        this.vehicleType = vehicleType;
+    }
+
+    public SpotEntity() {
+    }
 
     public Long getSpotId() {
         return spotId;
@@ -47,5 +59,13 @@ public class SpotEntity {
 
     public void setVehicleType(VehicleType vehicleType) {
         this.vehicleType = vehicleType;
+    }
+
+    public int getFloor() {
+        return floor;
+    }
+
+    public void setFloor(int floor) {
+        this.floor = floor;
     }
 }

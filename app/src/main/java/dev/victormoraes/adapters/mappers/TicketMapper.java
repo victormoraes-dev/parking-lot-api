@@ -1,6 +1,6 @@
 package dev.victormoraes.adapters.mappers;
 
-import dev.victormoraes.adapters.in.dtos.TicketResponseDTO;
+import dev.victormoraes.adapters.in.dtos.ticket.TicketResponseDTO;
 import dev.victormoraes.adapters.out.persistence.entities.TicketEntity;
 import dev.victormoraes.adapters.out.persistence.entities.VehicleEntity;
 import dev.victormoraes.domain.Ticket;

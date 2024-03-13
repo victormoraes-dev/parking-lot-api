@@ -1,4 +1,6 @@
-package dev.victormoraes.adapters.in.dtos;
+package dev.victormoraes.adapters.in.dtos.ticket;
+
+import dev.victormoraes.adapters.in.dtos.vehicle.VehicleDTO;
 
 import java.time.LocalDateTime;
 
