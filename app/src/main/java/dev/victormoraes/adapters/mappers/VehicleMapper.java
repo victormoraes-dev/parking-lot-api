@@ -13,7 +13,7 @@ public class VehicleMapper {
 
     VehicleDTO toDTO(Vehicle vehicle, VehicleType vehicleType) {
         VehicleDTO vehicleDTO = new VehicleDTO();
-        vehicleDTO.setCode(vehicle.getCode());
+        vehicleDTO.setPlate(vehicle.getPlate());
         vehicleDTO.setColor(vehicle.getColor());
         vehicleDTO.setModel(vehicle.getModel());
         vehicleDTO.setType(vehicleType);
@@ -24,7 +24,7 @@ public class VehicleMapper {
     public VehicleEntity toEntity(Vehicle vehicle, Class<?> vehicleType) {
 
         var vehicleEntity = VehicleFactory.getVehicleEntityByDomain(vehicleType);
-        vehicleEntity.setCode(vehicle.getCode());
+        vehicleEntity.setPlate(vehicle.getPlate());
         vehicleEntity.setColor(vehicle.getColor());
         vehicleEntity.setModel(vehicle.getModel());
         return vehicleEntity;
@@ -33,7 +33,7 @@ public class VehicleMapper {
     public Vehicle toDomainModel(VehicleEntity vehicleEntity, Class<?> vehicleType) {
         Vehicle vehicle = VehicleFactory.getVehicle(vehicleType);
         vehicle.setModel(vehicleEntity.getModel());
-        vehicle.setCode(vehicleEntity.getCode());
+        vehicle.setPlate(vehicleEntity.getPlate());
         vehicle.setColor(vehicleEntity.getColor());
         return vehicle;
     }

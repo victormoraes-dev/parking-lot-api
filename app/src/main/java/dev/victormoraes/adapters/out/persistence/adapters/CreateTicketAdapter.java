@@ -35,9 +35,9 @@ public class CreateTicketAdapter implements CreateTicketPort {
 
         TicketEntity ticketEntity = ticketMapper.toEntityModel(ticket);
 
-        var vehicleEntity = vehicleRepository.findByCode(ticket.getVehicle().getCode());
+        var vehicleEntity = vehicleRepository.findByPlate(ticket.getVehicle().getPlate());
         if (vehicleEntity.isEmpty()) {
-            throw new IllegalArgumentException(format("There is no vehicle for the code %s", ticket.getVehicle().getCode()));
+            throw new IllegalArgumentException(format("There is no vehicle for the code %s", ticket.getVehicle().getPlate()));
         }
         ticketEntity.setVehicle(vehicleEntity.get());
 

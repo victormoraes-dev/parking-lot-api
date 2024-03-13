@@ -60,7 +60,7 @@ public class Ticket {
     public String printTicket() {
 
         return format("[Vehicle] code=%s | model=%s | color=%s [Ticket] startTime=%s | endTime=%s",
-                vehicle.getCode(), vehicle.getModel(), vehicle.getColor(), formatTicketDate(startTime), formatTicketDate(endTime));
+                vehicle.getPlate(), vehicle.getModel(), vehicle.getColor(), formatTicketDate(startTime), formatTicketDate(endTime));
     }
 
     public void finalizeTicket() {

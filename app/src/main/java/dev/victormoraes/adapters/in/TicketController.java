@@ -3,14 +3,15 @@ package dev.victormoraes.adapters.in;
 import dev.victormoraes.adapters.in.dtos.ResponseWrapper;
 import dev.victormoraes.adapters.in.dtos.ticket.TicketRequestDTO;
 import dev.victormoraes.adapters.in.dtos.ticket.TicketResponseDTO;
-import dev.victormoraes.domain.Ticket;
 import dev.victormoraes.adapters.mappers.TicketMapper;
+import dev.victormoraes.domain.Ticket;
 import dev.victormoraes.domain.result.Result;
 import dev.victormoraes.domain.users.Customer;
 import dev.victormoraes.domain.vehicle.Vehicle;
 import dev.victormoraes.domain.vehicle.VehicleFactory;
 import dev.victormoraes.usecases.CreatingTicketUseCase;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -36,12 +37,12 @@ public class TicketController {
     }
 
     @PostMapping
-    public ResponseEntity<ResponseWrapper<TicketResponseDTO>> createTicket(@RequestBody TicketRequestDTO ticketRequestDTO)
+    public ResponseEntity<ResponseWrapper<TicketResponseDTO>> createTicket(@RequestBody @Valid TicketRequestDTO ticketRequestDTO)
             throws URISyntaxException {
 
         Vehicle vehicle = VehicleFactory.getVehicle(VehicleFactory.vehicleTypeFactory.get(ticketRequestDTO.vehicle().getType()));
         vehicle.setColor(ticketRequestDTO.vehicle().getColor());
-        vehicle.setCode(ticketRequestDTO.vehicle().getCode());
+        vehicle.setPlate(ticketRequestDTO.vehicle().getPlate());
         vehicle.setModel(ticketRequestDTO.vehicle().getModel());
 
         var user = new Customer(ticketRequestDTO.username());

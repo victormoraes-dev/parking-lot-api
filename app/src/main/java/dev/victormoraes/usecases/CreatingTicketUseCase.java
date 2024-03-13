@@ -53,7 +53,7 @@ public class CreatingTicketUseCase {
 
     private Vehicle getVehicle(Vehicle vehicle, VehicleType vehicleType) {
 
-        var returnedVehicle = getVehiclePort.getVehicle(vehicle.getCode(), vehicleType);
+        var returnedVehicle = getVehiclePort.getVehicle(vehicle.getPlate(), vehicleType);
         return returnedVehicle.orElseGet(() -> createVehiclePort.createVehicle(vehicle));
     }
 

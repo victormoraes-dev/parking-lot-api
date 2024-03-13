@@ -13,7 +13,7 @@ public abstract class VehicleEntity {
     private Long vehicleId;
 
     @Column
-    private String code;
+    private String plate;
 
     @Column
     private String model;
@@ -24,8 +24,8 @@ public abstract class VehicleEntity {
     public VehicleEntity() {
     }
 
-    public VehicleEntity(String code, String model, String color) {
-        this.code = code;
+    public VehicleEntity(String plate, String model, String color) {
+        this.plate = plate;
         this.model = model;
         this.color = color;
     }
@@ -54,12 +54,12 @@ public abstract class VehicleEntity {
         return vehicleId;
     }
 
-    public String getCode() {
-        return code;
+    public String getPlate() {
+        return plate;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public void setPlate(String plate) {
+        this.plate = plate;
     }
 
     public String getModel() {

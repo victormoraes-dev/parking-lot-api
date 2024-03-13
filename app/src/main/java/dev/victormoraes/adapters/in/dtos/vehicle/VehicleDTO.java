@@ -1,21 +1,27 @@
 package dev.victormoraes.adapters.in.dtos.vehicle;
 
 import dev.victormoraes.domain.vehicle.VehicleType;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 public class VehicleDTO {
 
-    private String code;
+    @NotBlank(message = "Plate is mandatory")
+    private String plate;
+    @NotBlank(message = "Model is mandatory")
     private String model;
+    @NotBlank(message = "Color is mandatory")
     private String color;
 
+    @NotNull(message = "Vehicle type is mandatory")
     private VehicleType type;
 
-    public String getCode() {
-        return code;
+    public String getPlate() {
+        return plate;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public void setPlate(String plate) {
+        this.plate = plate;
     }
 
     public String getModel() {
