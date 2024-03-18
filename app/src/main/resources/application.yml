@@ -5,13 +5,10 @@ spring:
   application:
     name: parking-lot-api
   datasource:
-    url: jdbc:postgresql://127.0.0.1:5432/parking-lot-api-db
+    url: jdbc:postgresql://${DATABASE_HOST}:${DATABASE_PORT}/${DATABASE_NAME}
     driver-class-name: org.postgresql.Driver
-    username: postgres
-    password: postgres
-  h2:
-    console:
-      enabled: true
+    username: ${DATABASE_USER}
+    password: ${DATABASE_PASSWORD}
   jpa:
     hibernate:
       ddl-auto: update

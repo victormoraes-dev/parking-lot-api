@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: parking-lot-api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: parking-lot-api
+  template:
+    metadata:
+      labels:
+        app: parking-lot-api
+    spec:
+      containers:
+        - name: parking-lot-api
+          image: victormoraesdev/parking-lot-api:v4
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          env:
+            - name: DATABASE_HOST
+              value: "host.minikube.internal"
+            - name: DATABASE_PORT
+              value: "5432"
+            - name: DATABASE_NAME
+              value: "parking-lot-api-db"
+            - name: DATABASE_USER
+              value: "postgres"
+            - name: DATABASE_PASSWORD
+              value: "postgres"
