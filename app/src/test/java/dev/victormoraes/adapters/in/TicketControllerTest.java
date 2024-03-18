@@ -30,7 +30,7 @@ class TicketControllerTest extends TestContainersBaseConfigTest {
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.success").value(true))
                 .andExpect(jsonPath("$.data.ticketId").isNumber())
-                .andExpect(jsonPath("$.data.vehicle.code").value("ABC123"))
+                .andExpect(jsonPath("$.data.vehicle.plate").value("ABC123"))
                 .andExpect(jsonPath("$.data.vehicle.model").value("Toyota Corolla"))
                 .andExpect(jsonPath("$.data.vehicle.color").value("Red"))
                 .andExpect(jsonPath("$.data.vehicle.type").value("CAR"))
@@ -54,7 +54,7 @@ class TicketControllerTest extends TestContainersBaseConfigTest {
 
         mockMvc.perform(MockMvcRequestBuilders
                         .post("/tickets")
-                        .content("{\"vehicle\":{\"code\":\"ABC123\",\"model\":\"Toyota Corolla\",\"color\":\"Red\",\"type\":\"CAR\"},\"vehicleType\":\"CAR\"}")
+                        .content("{\"vehicle\":{\"plate\":\"ABC123\",\"model\":\"Toyota Corolla\",\"color\":\"Red\",\"type\":\"CAR\"},\"vehicleType\":\"CAR\"}")
                         .contentType("application/json"))
                 .andExpect(status().isUnprocessableEntity())
                 .andExpect(jsonPath("$.success").value(false));

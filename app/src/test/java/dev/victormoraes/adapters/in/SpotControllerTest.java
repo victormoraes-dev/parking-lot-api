@@ -22,7 +22,7 @@ class SpotControllerTest extends TestContainersBaseConfigTest {
 
         mockMvc.perform(MockMvcRequestBuilders
                         .post("/spots")
-                        .content("{\"floor\": 1,\"position\":\"A10\",\"isFree\":true,\"vehicleType\":\"CAR\"}")
+                        .content("{\"floor\": \"1\",\"position\":\"A10\",\"isFree\":true,\"vehicleType\":\"CAR\"}")
                         .contentType("application/json"))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.success").value(true))

@@ -28,9 +28,9 @@ public class SpotController {
     }
 
     @PostMapping
-    public ResponseEntity<ResponseWrapper<SpotResponseDTO>> createTicket(@RequestBody SpotRequestDTO spotRequestDTO)
+    public ResponseEntity<ResponseWrapper<SpotResponseDTO>> createSpot(
+            @RequestBody SpotRequestDTO spotRequestDTO)
             throws URISyntaxException {
-
         var result = useCase.createSpot(SpotMapper.toDomain(spotRequestDTO));
 
         if (!result.isSuccess()) {
