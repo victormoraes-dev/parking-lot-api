@@ -81,7 +81,7 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- PostgreSQL       -->
+        <!-- PostgresSQL       -->
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
@@ -100,6 +100,13 @@
             <artifactId>postgresql</artifactId>
             <version>1.19.3</version>
             <scope>test</scope>
+        </dependency>
+
+        <!-- Swagger UI -->
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <version>2.4.0</version>
         </dependency>
     </dependencies>
 
