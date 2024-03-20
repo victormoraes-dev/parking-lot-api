@@ -16,6 +16,9 @@ spring:
       hibernate:
         format_sql: true
     open-in-view: false
+  sql:
+    init:
+      mode: always
 
 logging:
   level:
@@ -23,3 +26,6 @@ logging:
     org.springframework: INFO
     org.hibernate.SQL: DEBUG
 
+jwt:
+  secret: jwt-secret
+  expiration: 10000
