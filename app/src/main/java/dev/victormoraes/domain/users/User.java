@@ -1,5 +1,8 @@
 package dev.victormoraes.domain.users;
 
+import dev.victormoraes.adapters.mappers.visitors.IUserEntityVisitor;
+import dev.victormoraes.adapters.mappers.visitors.IUserVisitor;
+
 public abstract class User {
 
     private Long userId;
@@ -20,6 +23,8 @@ public abstract class User {
 
     public User() {
     }
+
+    public abstract <T> T accept(IUserVisitor<T> visitor);
 
     public Long getUserId() {
         return userId;

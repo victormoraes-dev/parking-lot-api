@@ -1,6 +1,8 @@
 package dev.victormoraes.domain.users;
 
-public class Customer extends User{
+import dev.victormoraes.adapters.mappers.visitors.IUserVisitor;
+
+public class Customer extends User {
     public Customer(String username) {
         super(username);
     }
@@ -10,5 +12,10 @@ public class Customer extends User{
     }
 
     public Customer() {
+    }
+
+    @Override
+    public <T> T accept(IUserVisitor<T> visitor) {
+        return visitor.visit(this);
     }
 }

@@ -1,5 +1,6 @@
 package dev.victormoraes.adapters.out.persistence.entities;
 
+import dev.victormoraes.adapters.mappers.visitors.IUserEntityVisitor;
 import jakarta.persistence.*;
 
 import java.util.Random;
@@ -37,6 +38,8 @@ public abstract class UserEntity {
     public UserEntity() {
     }
 
+    public abstract <T> T accept(IUserEntityVisitor<T> visitor);
+
     @Entity
     @DiscriminatorValue("ADMIN")
     public static class AdminEntity extends UserEntity {
@@ -46,6 +49,11 @@ public abstract class UserEntity {
 
         public AdminEntity() {
             super();
+        }
+
+        @Override
+        public <T> T accept(IUserEntityVisitor<T> visitor) {
+            return visitor.visit(this);
         }
     }
 
@@ -57,6 +65,10 @@ public abstract class UserEntity {
             super("anonymous");
         }
 
+        @Override
+        public <T> T accept(IUserEntityVisitor<T> visitor) {
+            return visitor.visit(this);
+        }
     }
 
     @Entity
@@ -69,6 +81,11 @@ public abstract class UserEntity {
         public CustomerEntity() {
             super();
         }
+
+        @Override
+        public <T> T accept(IUserEntityVisitor<T> visitor) {
+            return visitor.visit(this);
+        }
     }
 
     @Entity
@@ -80,6 +97,11 @@ public abstract class UserEntity {
 
         public OperatorEntity() {
             super();
+        }
+
+        @Override
+        public <T> T accept(IUserEntityVisitor<T> visitor) {
+            return visitor.visit(this);
         }
     }
 
