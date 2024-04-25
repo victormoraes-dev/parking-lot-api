@@ -6,6 +6,7 @@ import dev.victormoraes.adapters.in.dtos.spot.SpotResponseDTO;
 import dev.victormoraes.adapters.mappers.SpotMapper;
 import dev.victormoraes.usecases.CreatingSpotUseCase;
 import dev.victormoraes.usecases.DeletingSpotUseCase;
+import dev.victormoraes.usecases.GettingSpotUseCase;
 import dev.victormoraes.usecases.UpdatingSpotUseCase;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
@@ -24,12 +25,16 @@ public class SpotController {
     private final UpdatingSpotUseCase updatingSpotUseCase;
 
     private final DeletingSpotUseCase deletingSpotUseCase;
+
+    private final GettingSpotUseCase gettingSpotUseCase;
+
     private final HttpServletRequest request;
 
-    public SpotController(CreatingSpotUseCase useCase, UpdatingSpotUseCase updatingSpotUseCase, DeletingSpotUseCase deletingSpotUseCase, HttpServletRequest request) {
+    public SpotController(CreatingSpotUseCase useCase, UpdatingSpotUseCase updatingSpotUseCase, DeletingSpotUseCase deletingSpotUseCase, GettingSpotUseCase gettingSpotUseCase, HttpServletRequest request) {
         this.useCase = useCase;
         this.updatingSpotUseCase = updatingSpotUseCase;
         this.deletingSpotUseCase = deletingSpotUseCase;
+        this.gettingSpotUseCase = gettingSpotUseCase;
         this.request = request;
     }
 
@@ -39,7 +44,7 @@ public class SpotController {
             throws URISyntaxException {
         var result = useCase.createSpot(SpotMapper.toDomain(spotRequestDTO));
 
-        if (!result.isSuccess()) {
+        if (result.isSuccess()) {
             return ResponseEntity.unprocessableEntity().body(ResponseWrapper.error(result.getErrorMessage()));
         }
 
@@ -58,7 +63,7 @@ public class SpotController {
         var domainSpot = SpotMapper.toDomain(spotRequestDTO);
         var result = updatingSpotUseCase.updateSpot(spotId, domainSpot);
 
-        if (!result.isSuccess()) {
+        if (result.isSuccess()) {
             return ResponseEntity.unprocessableEntity().body(ResponseWrapper.error(result.getErrorMessage()));
         }
 
@@ -69,9 +74,22 @@ public class SpotController {
     @DeleteMapping("/{spotId}")
     public ResponseEntity<Void> deleteSpot(@PathVariable Long spotId) {
         var result = deletingSpotUseCase.deleteSpot(spotId);
-        if (!result.isSuccess()) {
+        if (result.isSuccess()) {
             return ResponseEntity.unprocessableEntity().build();
         }
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+
+    @GetMapping("/{spotId}")
+    public ResponseEntity<ResponseWrapper<SpotResponseDTO>> getSpot(@PathVariable Long spotId) {
+
+        var result = gettingSpotUseCase.getSpot(spotId);
+
+        if (result.isSuccess()) {
+            return ResponseEntity.unprocessableEntity().body(ResponseWrapper.error(result.getErrorMessage()));
+        }
+
+        SpotResponseDTO spotResponseDTO = SpotMapper.toResponseDTO(result.getResult());
+        return ResponseEntity.ok(ResponseWrapper.success(spotResponseDTO));
     }
 }

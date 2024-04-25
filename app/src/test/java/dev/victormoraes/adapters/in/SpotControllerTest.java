@@ -56,4 +56,19 @@ class SpotControllerTest extends TestContainersBaseConfigTest {
         mockMvc.perform(MockMvcRequestBuilders.delete("/spots/" + spotId))
                 .andExpect(status().isNoContent());
     }
+
+    @Test
+    @Sql(scripts = "/insert-test-spot.sql")
+    public void testGetSpotEndpoint() throws Exception {
+        long spotId = 1L;
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/spots/" + spotId))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.success").value(true))
+                .andExpect(jsonPath("$.data.spotId").value(spotId))
+                .andExpect(jsonPath("$.data.floor").exists())
+                .andExpect(jsonPath("$.data.position").exists())
+                .andExpect(jsonPath("$.data.free").exists())
+                .andExpect(jsonPath("$.data.vehicleType").exists());
+    }
 }
