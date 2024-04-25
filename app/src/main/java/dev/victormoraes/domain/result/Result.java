@@ -10,8 +10,18 @@ public class Result<T> {
         this.success = success;
     }
 
+    public Result(boolean success, T result) {
+        this.success = success;
+        this.result = result;
+    }
+
+    public Result(boolean success, String errorMessage) {
+        this.success = success;
+        this.errorMessage = errorMessage;
+    }
+
     public boolean isSuccess() {
-        return success;
+        return !success;
     }
 
     public T getResult() {
