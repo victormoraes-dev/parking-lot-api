@@ -7,21 +7,20 @@ import dev.victormoraes.domain.vehicle.VehicleFactory;
 import dev.victormoraes.domain.vehicle.VehicleType;
 import org.springframework.stereotype.Component;
 
+import java.util.Map;
+
 @Component
 public class VehicleMapper {
 
 
-    VehicleDTO toDTO(Vehicle vehicle, VehicleType vehicleType) {
-        VehicleDTO vehicleDTO = new VehicleDTO();
-        vehicleDTO.setPlate(vehicle.getPlate());
-        vehicleDTO.setColor(vehicle.getColor());
-        vehicleDTO.setModel(vehicle.getModel());
-        vehicleDTO.setType(vehicleType);
+    public static VehicleDTO toDTO(Vehicle vehicle) {
 
-        return vehicleDTO;
+        VehicleType vehicleType = getVehicleType(vehicle.getClass());
+
+        return new VehicleDTO(vehicle.getPlate(), vehicle.getModel(), vehicle.getColor(), vehicleType);
     }
 
-    public VehicleEntity toEntity(Vehicle vehicle, Class<?> vehicleType) {
+    public static VehicleEntity toEntity(Vehicle vehicle, Class<?> vehicleType) {
 
         var vehicleEntity = VehicleFactory.getVehicleEntityByDomain(vehicleType);
         vehicleEntity.setPlate(vehicle.getPlate());
@@ -30,12 +29,11 @@ public class VehicleMapper {
         return vehicleEntity;
     }
 
-    public Vehicle toDomainModel(VehicleEntity vehicleEntity, Class<?> vehicleType) {
-        Vehicle vehicle = VehicleFactory.getVehicle(vehicleType);
-        vehicle.setModel(vehicleEntity.getModel());
-        vehicle.setPlate(vehicleEntity.getPlate());
-        vehicle.setColor(vehicleEntity.getColor());
-        return vehicle;
+    private static VehicleType getVehicleType(Class<?> vehicleClass) {
+        return VehicleFactory.vehicleTypeFactory.entrySet().stream()
+                .filter(entry -> entry.getValue().equals(vehicleClass))
+                .map(Map.Entry::getKey)
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("Unknown vehicle class: " + vehicleClass));
     }
-
 }

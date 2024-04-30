@@ -7,8 +7,6 @@ import dev.victormoraes.domain.vehicle.Vehicle;
 import dev.victormoraes.usecases.ports.CreateVehiclePort;
 import org.springframework.stereotype.Component;
 
-import java.util.Optional;
-
 @Component
 public class CreateVehicleAdapter implements CreateVehiclePort {
 
@@ -20,14 +18,13 @@ public class CreateVehicleAdapter implements CreateVehiclePort {
         this.vehicleMapper = vehicleMapper;
     }
 
-
     @Override
     public Vehicle createVehicle(Vehicle vehicle) {
 
-        var vehicleEntity = vehicleMapper.toEntity(vehicle, vehicle.getClass());
+        var vehicleEntity = VehicleMapper.toEntity(vehicle, vehicle.getClass());
 
         VehicleEntity saved = vehicleRepository.save(vehicleEntity);
 
-        return vehicleMapper.toDomainModel(saved, vehicle.getClass());
+        return saved.toDomain();
     }
 }

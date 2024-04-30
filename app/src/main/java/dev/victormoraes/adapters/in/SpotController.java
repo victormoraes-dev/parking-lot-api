@@ -42,9 +42,10 @@ public class SpotController {
     public ResponseEntity<ResponseWrapper<SpotResponseDTO>> createSpot(
             @RequestBody SpotRequestDTO spotRequestDTO)
             throws URISyntaxException {
+
         var result = useCase.createSpot(SpotMapper.toDomain(spotRequestDTO));
 
-        if (result.isSuccess()) {
+        if (!result.isSuccess()) {
             return ResponseEntity.unprocessableEntity().body(ResponseWrapper.error(result.getErrorMessage()));
         }
 
@@ -63,7 +64,7 @@ public class SpotController {
         var domainSpot = SpotMapper.toDomain(spotRequestDTO);
         var result = updatingSpotUseCase.updateSpot(spotId, domainSpot);
 
-        if (result.isSuccess()) {
+        if (!result.isSuccess()) {
             return ResponseEntity.unprocessableEntity().body(ResponseWrapper.error(result.getErrorMessage()));
         }
 
@@ -74,7 +75,7 @@ public class SpotController {
     @DeleteMapping("/{spotId}")
     public ResponseEntity<Void> deleteSpot(@PathVariable Long spotId) {
         var result = deletingSpotUseCase.deleteSpot(spotId);
-        if (result.isSuccess()) {
+        if (!result.isSuccess()) {
             return ResponseEntity.unprocessableEntity().build();
         }
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
@@ -85,7 +86,7 @@ public class SpotController {
 
         var result = gettingSpotUseCase.getSpot(spotId);
 
-        if (result.isSuccess()) {
+        if (!result.isSuccess()) {
             return ResponseEntity.unprocessableEntity().body(ResponseWrapper.error(result.getErrorMessage()));
         }
 

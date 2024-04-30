@@ -13,17 +13,14 @@ public class GetUserAdapter implements GetUserPort {
 
     private final UserRepository userRepository;
 
-    private final UserMapper userMapper;
-
     public GetUserAdapter(UserRepository userRepository, UserMapper userMapper) {
         this.userRepository = userRepository;
-        this.userMapper = userMapper;
     }
 
     @Override
     public Optional<User> findUserByUsername(String username) {
 
         var user = userRepository.findByUsername(username);
-        return user.map(userMapper::toDomainModel);
+        return user.map(UserMapper::toDomainModel);
     }
 }

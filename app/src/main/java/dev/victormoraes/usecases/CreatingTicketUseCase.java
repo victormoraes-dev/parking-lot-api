@@ -9,6 +9,8 @@ import dev.victormoraes.domain.vehicle.VehicleType;
 import dev.victormoraes.usecases.ports.*;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+
 import static java.util.Objects.isNull;
 
 @Component
@@ -38,13 +40,11 @@ public class CreatingTicketUseCase {
             return result;
         }
 
-        var newTicket = new Ticket();
+
         var returnedVehicle = getVehicle(vehicle, vehicleType);
-        newTicket.setVehicle(returnedVehicle);
-
         var returnedUser = getUser(user);
-        newTicket.setUser(returnedUser);
 
+        var newTicket = new Ticket(returnedVehicle, returnedUser, LocalDateTime.now());
         var createdTicket = createTicketPort.createTicket(newTicket, vehicleType);
         Result<Ticket> result = new Result<>(true);
         result.setResult(createdTicket);

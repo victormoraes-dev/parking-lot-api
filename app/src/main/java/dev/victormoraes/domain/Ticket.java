@@ -12,49 +12,43 @@ import static java.util.Objects.isNull;
 public class Ticket {
 
     private Long ticketId;
-    private Vehicle vehicle;
-    private User user;
-    private LocalDateTime startTime;
+    private final Vehicle vehicle;
+    private final User user;
+    private final LocalDateTime startTime;
     private LocalDateTime endTime;
+
+    public Ticket(Long ticketId, Vehicle vehicle, User user, LocalDateTime startTime) {
+        this.ticketId = ticketId;
+        this.vehicle = vehicle;
+        this.user = user;
+        this.startTime = startTime;
+    }
+
+    public Ticket(Vehicle vehicle, User user, LocalDateTime startTime) {
+        this.vehicle = vehicle;
+        this.user = user;
+        this.startTime = startTime;
+    }
 
     public Long getTicketId() {
         return ticketId;
     }
 
-    public void setTicketId(Long ticketId) {
-        this.ticketId = ticketId;
-    }
 
     public Vehicle getVehicle() {
         return vehicle;
-    }
-
-    public void setVehicle(Vehicle vehicle) {
-        this.vehicle = vehicle;
     }
 
     public User getUser() {
         return user;
     }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
-
     public LocalDateTime getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(LocalDateTime startTime) {
-        this.startTime = startTime;
-    }
-
     public LocalDateTime getEndTime() {
         return endTime;
-    }
-
-    public void setEndTime(LocalDateTime endTime) {
-        this.endTime = endTime;
     }
 
     public String printTicket() {

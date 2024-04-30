@@ -17,23 +17,20 @@ public class CreateTicketAdapter implements CreateTicketPort {
 
     private final TicketRepository ticketRepository;
     private final VehicleRepository vehicleRepository;
-    private final TicketMapper ticketMapper;
     private final UserRepository userRepository;
 
     public CreateTicketAdapter(TicketRepository ticketRepository,
                                VehicleRepository vehicleRepository,
-                               TicketMapper ticketMapper,
                                UserRepository userRepository) {
         this.ticketRepository = ticketRepository;
         this.vehicleRepository = vehicleRepository;
-        this.ticketMapper = ticketMapper;
         this.userRepository = userRepository;
     }
 
     @Override
     public Ticket createTicket(Ticket ticket, VehicleType vehicleType) {
 
-        TicketEntity ticketEntity = ticketMapper.toEntityModel(ticket);
+        TicketEntity ticketEntity = TicketMapper.toEntityModel(ticket);
 
         var vehicleEntity = vehicleRepository.findByPlate(ticket.getVehicle().getPlate());
         if (vehicleEntity.isEmpty()) {
@@ -48,6 +45,6 @@ public class CreateTicketAdapter implements CreateTicketPort {
         ticketEntity.setUser(userEntity.get());
         var newTicketEntity = ticketRepository.save(ticketEntity);
 
-        return ticketMapper.toDomainModel(newTicketEntity, vehicleType);
+        return TicketMapper.toDomainModel(newTicketEntity);
     }
 }
