@@ -1,5 +1,6 @@
 package dev.victormoraes.adapters.out.persistence.entities;
 
+import dev.victormoraes.domain.vehicle.*;
 import jakarta.persistence.*;
 
 @Entity
@@ -30,24 +31,43 @@ public abstract class VehicleEntity {
         this.color = color;
     }
 
+    public abstract Vehicle toDomain();
+
     @Entity
     @DiscriminatorValue("CAR")
     public static class CarEntity extends VehicleEntity {
+
+        @Override
+        public Vehicle toDomain() {
+            return new Car(this.getVehicleId(), this.getPlate(), this.getModel(), this.getColor());
+        }
     }
 
     @Entity
     @DiscriminatorValue("MOTORCYCLE")
     public static class MotorcycleEntity extends VehicleEntity {
+        @Override
+        public Vehicle toDomain() {
+            return new Motorcycle(this.getVehicleId(), this.getPlate(), this.getModel(), this.getColor());
+        }
     }
 
     @Entity
     @DiscriminatorValue("TRUCK")
     public static class TruckEntity extends VehicleEntity {
+        @Override
+        public Vehicle toDomain() {
+            return new Truck(this.getVehicleId(), this.getPlate(), this.getModel(), this.getColor());
+        }
     }
 
     @Entity
     @DiscriminatorValue("VAN")
     public static class VanEntity extends VehicleEntity {
+        @Override
+        public Vehicle toDomain() {
+            return new Van(this.getVehicleId(), this.getPlate(), this.getModel(), this.getColor());
+        }
     }
 
     public Long getVehicleId() {

@@ -10,13 +10,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserMapper {
 
-    public UserEntity toEntityModel(User user) {
+    public static UserEntity toEntityModel(User user) {
 
         var userVisitor = new UserVisitor();
         return user.accept(userVisitor);
     }
 
-    public User toDomainModel(UserEntity userEntity) {
+    public static User toDomainModel(UserEntity userEntity) {
         IUserEntityVisitor<User> visitor = new UserEntityVisitor();
         return userEntity.accept(visitor);
     }

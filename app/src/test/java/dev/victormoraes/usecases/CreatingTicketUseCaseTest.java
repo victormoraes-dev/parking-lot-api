@@ -26,14 +26,19 @@ class CreatingTicketUseCaseTest {
 
     @Mock
     private SpotAvailabilityPort spotAvailabilityPort;
+
     @Mock
     private CreateTicketPort createTicketPort;
+
     @Mock
     private GetVehiclePort getVehiclePort;
+
     @Mock
     private CreateVehiclePort createVehiclePort;
+
     @Mock
     private CreateUserPort createUserPort;
+
     @Mock
     private GetUserPort getUserPort;
 
@@ -43,7 +48,7 @@ class CreatingTicketUseCaseTest {
     @Test
     public void whenANewVehicleIsEnteringTheParkingLotShouldCreateANewTicket() {
 
-        Vehicle vehicle = new Car();
+        Vehicle vehicle = new Car(1010117876L, "plate", "model", "color");
         User user = new Anonymous();
         Result<Ticket> ticketResult = useCase.enterParkingLot(user, vehicle, VehicleType.CAR);
         assertNotNull(ticketResult);
@@ -52,13 +57,11 @@ class CreatingTicketUseCaseTest {
     @Test
     public void whenANewVehicleIsEnteringTheParkingLotShouldCreateANewTicketWithFulfilledStartTime() {
 
-        Vehicle vehicle = new Car();
+        Vehicle vehicle = new Car(1010117876L, "plate", "model", "color");
         User user = new Anonymous();
         when(spotAvailabilityPort.checkSpotAvailability(VehicleType.CAR)).thenReturn(true);
 
-        Ticket ticket = new Ticket();
-        ticket.setVehicle(vehicle);
-        ticket.setStartTime(LocalDateTime.now());
+        Ticket ticket = new Ticket(101016847L, vehicle, user,LocalDateTime.now());
         when(createTicketPort.createTicket(any(), Mockito.eq(VehicleType.CAR))).thenReturn(ticket);
 
         Result<Ticket> ticketResult = useCase.enterParkingLot(user, vehicle, VehicleType.CAR);

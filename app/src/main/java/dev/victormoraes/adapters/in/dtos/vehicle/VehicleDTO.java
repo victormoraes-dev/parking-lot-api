@@ -4,47 +4,35 @@ import dev.victormoraes.domain.vehicle.VehicleType;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
-public class VehicleDTO {
+public record VehicleDTO(@NotBlank(message = "Plate is mandatory") String plate,
+                         @NotBlank(message = "Model is mandatory") String model,
+                         @NotBlank(message = "Color is mandatory") String color,
+                         @NotNull(message = "Vehicle type is mandatory") VehicleType type) {
 
-    @NotBlank(message = "Plate is mandatory")
-    private String plate;
-    @NotBlank(message = "Model is mandatory")
-    private String model;
-    @NotBlank(message = "Color is mandatory")
-    private String color;
+    public VehicleDTO(String plate, String model, String color, VehicleType type) {
+        this.plate = plate;
+        this.model = model;
+        this.color = color;
+        this.type = type;
+    }
 
-    @NotNull(message = "Vehicle type is mandatory")
-    private VehicleType type;
-
-    public String getPlate() {
+    @Override
+    public String plate() {
         return plate;
     }
 
-    public void setPlate(String plate) {
-        this.plate = plate;
-    }
-
-    public String getModel() {
+    @Override
+    public String model() {
         return model;
     }
 
-    public void setModel(String model) {
-        this.model = model;
-    }
-
-    public String getColor() {
+    @Override
+    public String color() {
         return color;
     }
 
-    public void setColor(String color) {
-        this.color = color;
-    }
-
-    public VehicleType getType() {
+    @Override
+    public VehicleType type() {
         return type;
-    }
-
-    public void setType(VehicleType type) {
-        this.type = type;
     }
 }

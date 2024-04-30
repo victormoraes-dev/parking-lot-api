@@ -20,13 +20,6 @@ public class VehicleFactory {
             VehicleType.TRUCK, Truck.class,
             VehicleType.VAN, Van.class);
 
-    private static final Map<Class<?>, Supplier<VehicleEntity>> vehicleEntityFactory = Map.of(
-            VehicleEntity.CarEntity.class, VehicleEntity.CarEntity::new,
-            VehicleEntity.MotorcycleEntity.class, VehicleEntity.MotorcycleEntity::new,
-            VehicleEntity.TruckEntity.class, VehicleEntity.TruckEntity::new,
-            VehicleEntity.VanEntity.class, VehicleEntity.VanEntity::new
-    );
-
     private static final Map<Class<?>, Supplier<VehicleEntity>> vehicleEntityByDomainFactory = Map.of(
             Car.class, VehicleEntity.CarEntity::new,
             Motorcycle.class, VehicleEntity.MotorcycleEntity::new,
@@ -42,17 +35,6 @@ public class VehicleFactory {
             return factory.get();
         } else {
             throw new IllegalArgumentException("Invalid vehicle type: " + vehicleType);
-        }
-    }
-
-    public static VehicleEntity getVehicleEntity(Class<?> vehicleType) {
-
-        Supplier<VehicleEntity> factory = vehicleEntityFactory.get(vehicleType);
-
-        if (factory != null) {
-            return factory.get();
-        } else {
-            throw new IllegalArgumentException("Invalid vehicle entity type: " + vehicleType);
         }
     }
 

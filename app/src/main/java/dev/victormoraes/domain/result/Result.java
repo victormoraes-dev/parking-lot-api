@@ -21,7 +21,7 @@ public class Result<T> {
     }
 
     public boolean isSuccess() {
-        return !success;
+        return success;
     }
 
     public T getResult() {

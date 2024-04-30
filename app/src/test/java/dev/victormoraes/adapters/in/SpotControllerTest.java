@@ -19,7 +19,7 @@ class SpotControllerTest extends TestContainersBaseConfigTest {
     private MockMvc mockMvc;
 
     @Test
-    public void testCreateSpotEndpoint() throws Exception {
+    public void givenAValidSpotBodyShouldCreateASpot() throws Exception {
 
         mockMvc.perform(MockMvcRequestBuilders
                         .post("/spots")
@@ -32,9 +32,9 @@ class SpotControllerTest extends TestContainersBaseConfigTest {
     }
 
     @Test
-    @Sql(scripts = "/insert-test-spot.sql") // SQL script to insert a test spot
+    @Sql(scripts = "/insert-test-spot-id-1000.sql") // SQL script to insert a test spot
     public void testUpdateSpotEndpoint() throws Exception {
-        long spotId = 1L;
+        long spotId = 1000L;
         String requestBody = "{\"isFree\":false, \"position\":\"A11\",\"vehicleType\":\"CAR\"}";
 
         mockMvc.perform(MockMvcRequestBuilders.patch("/spots/" + spotId)
@@ -49,18 +49,18 @@ class SpotControllerTest extends TestContainersBaseConfigTest {
     }
 
     @Test
-    @Sql(scripts = "/insert-test-spot.sql")
+    @Sql(scripts = "/insert-test-spot-id-1001.sql")
     public void testDeleteSpotEndpoint() throws Exception {
-        long spotId = 1L;
+        long spotId = 1001L;
 
         mockMvc.perform(MockMvcRequestBuilders.delete("/spots/" + spotId))
                 .andExpect(status().isNoContent());
     }
 
     @Test
-    @Sql(scripts = "/insert-test-spot.sql")
-    public void testGetSpotEndpoint() throws Exception {
-        long spotId = 1L;
+    @Sql(scripts = "/insert-test-spot-id-1002.sql")
+    public void givenAValidSpotIdShouldReturnTheSpot() throws Exception {
+        long spotId = 1002L;
 
         mockMvc.perform(MockMvcRequestBuilders.get("/spots/" + spotId))
                 .andExpect(status().isOk())

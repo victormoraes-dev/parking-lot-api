@@ -1,11 +1,21 @@
 package dev.victormoraes.adapters.in.dtos.spot;
 
 import dev.victormoraes.domain.vehicle.VehicleType;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 public abstract class SpotDTO {
-    private final int floor;
+
+    @NotNull(message = "Floor field is required")
+    @Min(0)
+    private final Integer floor;
+
+    @NotBlank(message = "Position field is required")
     private final String position;
-    private boolean isFree;
+
+    @NotNull(message = "Position field is required")
+    private Boolean isFree;
 
     private final VehicleType vehicleType;
 
