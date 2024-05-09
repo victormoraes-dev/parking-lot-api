@@ -1,11 +1,9 @@
 package dev.victormoraes.adapters.in;
 
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -20,6 +18,7 @@ class TicketControllerTest extends TestContainersBaseConfigTest {
 
     @Autowired
     private MockMvc mockMvc;
+
 
     @Test
     @Sql(scripts = "/create-ticket-insert-available-spot.sql")
@@ -60,5 +59,20 @@ class TicketControllerTest extends TestContainersBaseConfigTest {
                         .contentType("application/json"))
                 .andExpect(status().isUnprocessableEntity())
                 .andExpect(jsonPath("$.success").value(false));
+    }
+
+    @Test
+    @Sql(scripts = {"/insert-ticket-1000.sql"})
+    public void givenATicketIdWhenFinalizeThenShouldUpdateTicketEndDate() throws Exception {
+
+        long ticketId = 1000L;
+
+        mockMvc.perform(MockMvcRequestBuilders
+                        .patch("/tickets/" + ticketId + "/finalize")
+                        .contentType("application/json"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.success").value(true))
+                .andExpect(jsonPath("$.data.ticketId").value(ticketId))
+                .andExpect(jsonPath("$.data.endTime").isNotEmpty());
     }
 }

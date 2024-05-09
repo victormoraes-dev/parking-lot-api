@@ -30,6 +30,7 @@ public class FetchTicketAdapter implements FetchTicketPort {
         return new Result<>(true, new Ticket(ticketEntity.getTicketId(),
                 ticketEntity.getVehicle().toDomain(),
                 UserMapper.toDomainModel(ticketEntity.getUser()),
-                ticketEntity.getStartTime()));
+                ticketEntity.getStartTime(),
+                ticketEntity.getEndTime()));
     }
 }

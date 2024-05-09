@@ -10,6 +10,7 @@ import java.util.Random;
 public class TicketEntity {
 
     @Id
+    @Column(name = "ticket_id")
     private Long ticketId;
 
     @ManyToOne
@@ -35,6 +36,10 @@ public class TicketEntity {
         this.startTime = LocalDateTime.now();
     }
 
+    public void finalizeTicket() {
+        endTime = LocalDateTime.now();
+    }
+
     public VehicleEntity getVehicle() {
         return vehicle;
     }
@@ -49,10 +54,6 @@ public class TicketEntity {
 
     public LocalDateTime getEndTime() {
         return endTime;
-    }
-
-    public void setEndTime(LocalDateTime endTime) {
-        this.endTime = endTime;
     }
 
     public Long getTicketId() {

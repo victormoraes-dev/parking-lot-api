@@ -17,11 +17,12 @@ public class Ticket {
     private final LocalDateTime startTime;
     private LocalDateTime endTime;
 
-    public Ticket(Long ticketId, Vehicle vehicle, User user, LocalDateTime startTime) {
+    public Ticket(Long ticketId, Vehicle vehicle, User user, LocalDateTime startTime, LocalDateTime endTime) {
         this.ticketId = ticketId;
         this.vehicle = vehicle;
         this.user = user;
         this.startTime = startTime;
+        this.endTime = endTime;
     }
 
     public Ticket(Vehicle vehicle, User user, LocalDateTime startTime) {
@@ -55,10 +56,6 @@ public class Ticket {
 
         return format("[Vehicle] code=%s | model=%s | color=%s [Ticket] startTime=%s | endTime=%s",
                 vehicle.getPlate(), vehicle.getModel(), vehicle.getColor(), formatTicketDate(startTime), formatTicketDate(endTime));
-    }
-
-    public void finalizeTicket() {
-        endTime = LocalDateTime.now();
     }
 
     public boolean isValidTicket() {
