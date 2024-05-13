@@ -75,4 +75,14 @@ class TicketControllerTest extends TestContainersBaseConfigTest {
                 .andExpect(jsonPath("$.data.ticketId").value(ticketId))
                 .andExpect(jsonPath("$.data.endTime").isNotEmpty());
     }
+
+    @Test
+    public void givenNonExistentTicketIdShouldReturnBadRequestStatusCode() throws Exception {
+        long nonExistentTicketId = 9999L;
+
+        mockMvc.perform(MockMvcRequestBuilders
+                        .get("/tickets/" + nonExistentTicketId)
+                        .contentType("application/json"))
+                .andExpect(status().isNotFound());
+    }
 }

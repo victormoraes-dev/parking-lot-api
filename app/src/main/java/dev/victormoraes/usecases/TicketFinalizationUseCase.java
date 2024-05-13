@@ -25,7 +25,7 @@ public class TicketFinalizationUseCase {
         Ticket ticket = getTicketPort.getTicketById(ticketId);
 
         if (nonNull(ticket.getEndTime())) {
-            return new Result<>(false, "Ticket is already finalized");
+            return new Result<>("Ticket is already finalized");
         }
 
         Ticket returnedTicket = finalizeTicketPort.finalizeTicket(ticketId);

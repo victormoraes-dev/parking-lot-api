@@ -1,5 +1,6 @@
 package dev.victormoraes.adapters.in;
 
+import dev.victormoraes.adapters.exceptions.NotFoundException;
 import dev.victormoraes.adapters.in.dtos.ResponseWrapper;
 import dev.victormoraes.adapters.in.dtos.ticket.TicketRequestDTO;
 import dev.victormoraes.adapters.in.dtos.ticket.TicketResponseDTO;
@@ -67,7 +68,11 @@ public class TicketController {
         Result<Ticket> ticketResult = fetchingTicketUseCase.fetchTicketById(ticketId);
 
         if (!ticketResult.isSuccess()) {
-            return ResponseEntity.badRequest().body(ResponseWrapper.error(ticketResult.getErrorMessage()));
+
+            if (ticketResult.getThrownException() instanceof NotFoundException) {
+                return ResponseEntity.notFound().build();
+            }
+            return ResponseEntity.unprocessableEntity().body(ResponseWrapper.error(ticketResult.getErrorMessage()));
         }
 
         TicketResponseDTO ticketResponseDTO = TicketMapper.toResponseDTO(ticketResult.getResult());
