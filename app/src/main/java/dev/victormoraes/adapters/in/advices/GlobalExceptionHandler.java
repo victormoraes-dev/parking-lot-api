@@ -24,9 +24,8 @@ public class GlobalExceptionHandler {
                     errors.put(fieldName, errorMessage);
                 });
 
-        Result<Map<String, String>> result = new Result<>(false);
+        Result<Map<String, String>> result = new Result<>("There are required fields");
         result.setResult(errors);
-        result.setErrorMessage("There are required fields");
         return ResponseEntity.badRequest().body(result);
     }
 }

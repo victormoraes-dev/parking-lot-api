@@ -19,9 +19,7 @@ public class DeleteSpotAdapter implements DeleteSpotPort {
             spotRepository.deleteById(spotId);
             return new Result<>(true);
         } catch (Exception e) {
-            Result<Void> resultError = new Result<>(false);
-            resultError.setErrorMessage(e.getMessage());
-            return resultError;
+            return new Result<>(e.getMessage());
         }
     }
 }

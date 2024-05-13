@@ -61,7 +61,7 @@ class CreatingTicketUseCaseTest {
         User user = new Anonymous();
         when(spotAvailabilityPort.checkSpotAvailability(VehicleType.CAR)).thenReturn(true);
 
-        Ticket ticket = new Ticket(101016847L, vehicle, user,LocalDateTime.now());
+        Ticket ticket = new Ticket(101016847L, vehicle, user,LocalDateTime.now(), null);
         when(createTicketPort.createTicket(any(), Mockito.eq(VehicleType.CAR))).thenReturn(ticket);
 
         Result<Ticket> ticketResult = useCase.enterParkingLot(user, vehicle, VehicleType.CAR);

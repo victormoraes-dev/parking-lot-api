@@ -1,5 +1,6 @@
 package dev.victormoraes.adapters.out.persistence.adapters;
 
+import dev.victormoraes.adapters.exceptions.NotFoundException;
 import dev.victormoraes.adapters.mappers.UserMapper;
 import dev.victormoraes.adapters.out.persistence.repositories.TicketRepository;
 import dev.victormoraes.domain.Ticket;
@@ -23,13 +24,14 @@ public class FetchTicketAdapter implements FetchTicketPort {
         var entity = ticketRepository.findById(ticketId);
 
         if (entity.isEmpty()) {
-            return new Result<>(false, "Ticket not found");
+            return new Result<>(new NotFoundException("Ticket not found"));
         }
 
         var ticketEntity = entity.get();
         return new Result<>(true, new Ticket(ticketEntity.getTicketId(),
                 ticketEntity.getVehicle().toDomain(),
                 UserMapper.toDomainModel(ticketEntity.getUser()),
-                ticketEntity.getStartTime()));
+                ticketEntity.getStartTime(),
+                ticketEntity.getEndTime()));
     }
 }

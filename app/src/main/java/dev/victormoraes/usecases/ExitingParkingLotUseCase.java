@@ -10,7 +10,7 @@ public class ExitingParkingLotUseCase {
 
         // validate ticket
 
-        ticket.finalizeTicket();
+        //ticket.finalizeTicket();
 
         return ticket;
     }

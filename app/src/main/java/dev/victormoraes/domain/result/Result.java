@@ -3,6 +3,7 @@ package dev.victormoraes.domain.result;
 public class Result<T> {
     private final boolean success;
     private T result;
+    private Exception errorType;
 
     private String errorMessage;
 
@@ -15,9 +16,14 @@ public class Result<T> {
         this.result = result;
     }
 
-    public Result(boolean success, String errorMessage) {
-        this.success = success;
+    public Result(String errorMessage) {
+        this.success = false;
         this.errorMessage = errorMessage;
+    }
+
+    public Result(Exception errorType) {
+        this.success = false;
+        this.errorType = errorType;
     }
 
     public boolean isSuccess() {
@@ -36,7 +42,11 @@ public class Result<T> {
         return errorMessage;
     }
 
-    public void setErrorMessage(String errorMessage) {
-        this.errorMessage = errorMessage;
+    public Exception getThrownException() {
+        return errorType;
+    }
+
+    public void setThrownException(Exception thrownException) {
+        this.errorType = thrownException;
     }
 }

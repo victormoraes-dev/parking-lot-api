@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 
+import static java.lang.String.format;
 import static java.util.Objects.isNull;
 
 @Component
@@ -35,9 +36,7 @@ public class CreatingTicketUseCase {
     public Result<Ticket> enterParkingLot(User user, Vehicle vehicle, VehicleType vehicleType) {
 
         if (!spotAvailabilityPort.checkSpotAvailability(vehicleType)) {
-            Result<Ticket> result = new Result<>(false);
-            result.setErrorMessage(String.format("There is no spots available for the car type: %s", vehicleType));
-            return result;
+            return new Result<>(format("There is no spots available for the car type: %s", vehicleType));
         }
 
 

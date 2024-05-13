@@ -22,6 +22,6 @@ public class GetSpotAdapter implements GetSpotPort {
         return spotRepository.findById(spotId)
                 .map(SpotMapper::toDomain)
                 .map(spot -> new Result<>(true, spot))
-                .orElse(new Result<>(false, "Spot not found"));
+                .orElse(new Result<>("Spot not found"));
     }
 }
